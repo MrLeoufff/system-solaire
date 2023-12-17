@@ -1,0 +1,54 @@
+@use "../abstracts/_all" as abstracts
+@use "sass:math"
+@use "sass:map"
+
+$list-planets: 'mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'
+$planets-size: ("mercury": #{abstracts.$mercury-size}, "venus": #{abstracts.$venus-size}, "earth": #{abstracts.$earth-size}, "mars": #{abstracts.$mars-size}, "jupiter": #{abstracts.$jupiter-size}, "saturn": #{abstracts.$saturn-size}, "uranus": #{abstracts.$uranus-size}, "neptune": #{abstracts.$neptune-size})
+
+
+.planet
+
+    @each $planet in $list-planets
+        &--#{$planet}
+            $background-planet: "../images/#{$planet}.svg"
+            $size-planet: map.get($planets-size, $planet)
+            @include abstracts.circle($size-planet, $background-planet)
+            @if $planet == 'uranus' or $planet == 'saturn'
+                border-radius: 0
+
+    &--mercury
+        $distance-between-mercury-and-sun: abstracts.$gap-between-planets
+        @include abstracts.rotate-arount-sun($distance-between-mercury-and-sun, abstracts.$mercury-size, 7s)
+
+    &--venus
+        $distance-between-venus-and-sun: 2 * abstracts.$gap-between-planets + abstracts.$mercury-size
+        @include abstracts.rotate-arount-sun($distance-between-venus-and-sun, abstracts.$venus-size, 8s)
+
+    &--earth
+        $distance-between-earth-and-sun: 5 * abstracts.$gap-between-planets + abstracts.$venus-size
+        @include abstracts.rotate-arount-sun($distance-between-earth-and-sun, abstracts.$earth-size, 10s)
+        position: relative
+
+    &--mars
+        $distance-between-mars-and-sun: 10.5 * abstracts.$gap-between-planets + abstracts.$earth-size
+        @include abstracts.rotate-arount-sun($distance-between-mars-and-sun, abstracts.$mars-size, 13s)
+        position: relative
+
+    &--jupiter
+        $distance-between-jupiter-and-sun: 16.5 * abstracts.$gap-between-planets + abstracts.$mars-size
+        @include abstracts.rotate-arount-sun($distance-between-jupiter-and-sun, abstracts.$jupiter-size, 16s)
+
+    &--saturn
+        $distance-between-saturn-and-sun: 20.5 * abstracts.$gap-between-planets + abstracts.$jupiter-size
+        @include abstracts.rotate-arount-sun($distance-between-saturn-and-sun, abstracts.$saturn-size, 20s)
+
+    &--uranus
+        $distance-between-uranus-and-sun: 32 * abstracts.$gap-between-planets + abstracts.$saturn-size
+        @include abstracts.rotate-arount-sun($distance-between-uranus-and-sun, abstracts.$uranus-size, 25s)
+
+    &--neptune
+        $distance-between-neptune-and-sun: 43 * abstracts.$gap-between-planets + abstracts.$uranus-size
+        @include abstracts.rotate-arount-sun($distance-between-neptune-and-sun, abstracts.$neptune-size, 30s)
+        
+
+        

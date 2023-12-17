@@ -1,0 +1,23 @@
+@use "./_variables" as var
+@use "sass:math"
+
+@mixin circle($diametre, $url: "")
+    border-radius: 100%
+    width: $diametre
+    height: $diametre
+    background-image: url($url) 
+    flex-shrink: 0
+
+@mixin rotate-arount-planet($duration: 5s, $planet-size)
+    $center-x: 50%//math.div(abstracts.$satellite-size, 2)
+    $center-y: calc(50% + math.div($planet-size, 2))
+    transform-origin: $center-x $center-y 
+    animation: animation-rotate $duration linear infinite
+
+@mixin rotate-arount-sun($distance-to-sun, $planet-size, $duration: 10s)
+    $center-x: -1 * ($distance-to-sun + math.div(var.$sun-size, 2))
+    $center-y: math.div($planet-size, 2)
+    transform-origin: $center-x $center-y
+    animation: animation-rotate $duration linear infinite
+    
+
